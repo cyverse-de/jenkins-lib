@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-@Grab(group='io.github.http-builder-ng', module='http-builder-ng-core', version='1.0.4')
+@Grab('io.github.http-builder-ng:http-builder-ng-core:1.0.4')
 
 import groovyx.net.http.*
 
@@ -25,7 +25,7 @@ def create(token, owner, repo, releaseName) {
 }
 
 def uploadArtifact(token, owner, repo, releaseId, artifactName, artifactContents) {
-    return githubClient(token).post{
+    return githubClient(token).post {
         request.uri = "https://uploads.github.com/repos/${owner}/${repo}/releases/${releaseId}/assets"
         request.contentType = 'application/octet-stream'
         request.uri.query = [name: artifactName]
