@@ -2,7 +2,8 @@
 
 @Grab('io.github.http-builder-ng:http-builder-ng-core:1.0.4')
 
-import groovyx.net.http.*
+import groovyx.net.http.ContentTypes
+import groovyx.net.http.HttpBuilder
 
 def githubClient(token) {
     return HttpBuilder.configure {
