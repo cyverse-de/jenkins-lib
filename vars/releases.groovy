@@ -4,6 +4,7 @@
 
 import groovyx.net.http.*
 
+@NonCPS
 def githubClient(token) {
     return HttpBuilder.configure {
         request.uri = 'https://api.github.com'
@@ -12,6 +13,7 @@ def githubClient(token) {
     }
 }
 
+@NonCPS
 def create(token, owner, repo, releaseName) {
     releaseInfo = githubClient(token).post {
         request.uri.path = "/repos/${owner}/${repo}/releases"
@@ -25,12 +27,14 @@ def create(token, owner, repo, releaseName) {
     return releaseInfo["id"]
 }
 
+@NonCPS
 def uploadArtifact(token, owner, repo, releaseId, artifactName, fileName) {
     f = new File(fileName)
-    return githubClient(token).post {
+    result = githubClient(token).post {
         request.uri = "https://uploads.github.com/repos/${owner}/${repo}/releases/${releaseId}/assets"
         request.contentType = 'application/octet-stream'
         request.uri.query = [name: artifactName]
         request.body = f.bytes
     }
+    return result
 }
