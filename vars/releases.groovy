@@ -13,18 +13,15 @@ def githubClient(token) {
 }
 
 def create(token, owner, repo, releaseName) {
-    echo "Owner: ${owner}"
-    echo "Repo: ${repo}"
-    echo "Release Name: ${releaseName}"
-    // releaseInfo = githubClient(token).post {
-    //     request.uri.path = "/repos/${owner}/${repo}/releases"
-    //     request.contentType = ContentTypes.JSON[0]
-    //     request.body = [
-    //         tag_name: releaseName,
-    //         target_commitish: "master",
-    //         name: releaseName
-    //     ]
-    // }
+    releaseInfo = githubClient(token).post {
+        request.uri.path = "/repos/${owner}/${repo}/releases"
+        request.contentType = ContentTypes.JSON[0]
+        request.body = [
+            tag_name: releaseName,
+            target_commitish: "master",
+            name: releaseName
+        ]
+    }
     return releaseInfo["id"]
 }
 
