@@ -13,7 +13,7 @@ def githubClient(token) {
 }
 
 def create(token, owner, repo, releaseName) {
-    return githubClient(token).post {
+    releaseInfo = githubClient(token).post {
         request.uri.path = "/repos/${owner}/${repo}/releases"
         request.contentType = ContentTypes.JSON[0]
         request.body = [
@@ -21,7 +21,8 @@ def create(token, owner, repo, releaseName) {
             target_commitish: "master",
             name: releaseName
         ]
-    }['id']
+    }
+    return releaseInfo["id"]
 }
 
 def uploadArtifact(token, owner, repo, releaseId, artifactName, artifactContents) {
