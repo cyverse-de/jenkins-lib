@@ -15,7 +15,7 @@ def githubClient(token) {
 
 @NonCPS
 def create(token, owner, repo, releaseName) {
-    releaseInfo = githubClient(token).post {
+    def releaseInfo = githubClient(token).post {
         request.uri.path = "/repos/${owner}/${repo}/releases"
         request.contentType = ContentTypes.JSON[0]
         request.body = [
@@ -24,18 +24,16 @@ def create(token, owner, repo, releaseName) {
             name: releaseName
         ]
     }
-    println "Created the release!"
     return releaseInfo["id"]
 }
 
 @NonCPS
 def uploadArtifact(token, owner, repo, releaseId, artifactName, fileName) {
-    f = new File(fileName)
-    result = githubClient(token).post {
+    def f = new File(fileName)
+    githubClient(token).post {
         request.uri = "https://uploads.github.com/repos/${owner}/${repo}/releases/${releaseId}/assets"
         request.contentType = 'application/octet-stream'
         request.uri.query = [name: artifactName]
         request.body = f.bytes
     }
-    return result
 }
