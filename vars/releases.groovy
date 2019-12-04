@@ -36,4 +36,5 @@ def uploadArtifact(token, owner, repo, releaseId, artifactName, fileName) {
         request.uri.query = [name: artifactName]
         request.body = f.bytes
     }
+    return
 }
