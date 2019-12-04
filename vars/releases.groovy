@@ -24,6 +24,7 @@ def create(token, owner, repo, releaseName) {
             name: releaseName
         ]
     }
+    println "Created the release!"
     return releaseInfo["id"]
 }
 
