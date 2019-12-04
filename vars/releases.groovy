@@ -35,4 +35,5 @@ def uploadArtifact(token, owner, repo, releaseId, artifactName, artifactContents
         request.contentType = 'application/octet-stream'
         request.body = artifactContents.getBytes()
     }
+    return
 }
