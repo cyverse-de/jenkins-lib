@@ -34,6 +34,6 @@ def uploadArtifact(token, owner, repo, releaseId, artifactName, fileName) {
     def response = githubClient(token).post {
         request.uri = uri
         request.contentType = 'application/octet-stream'
-        request.body = f.bytes
+        request.body = 'fake content'
     }
 }
