@@ -12,6 +12,7 @@ def githubClient(token) {
     }
 }
 
+@NonCPS
 def create(token, owner, repo, releaseName) {
     releaseInfo = githubClient(token).post {
         request.uri.path = "/repos/${owner}/${repo}/releases"
@@ -25,6 +26,7 @@ def create(token, owner, repo, releaseName) {
     return releaseInfo["id"]
 }
 
+@NonCPS
 def uploadArtifact(token, owner, repo, releaseId, artifactName, artifactContents) {
     return githubClient(token).post {
         request.uri = "https://uploads.github.com/repos/${owner}/${repo}/releases/${releaseId}/assets"
