@@ -33,6 +33,6 @@ def uploadArtifact(token, owner, repo, releaseId, artifactName, artifactContents
     githubClient(token).post {
         request.uri = uri
         request.contentType = 'application/octet-stream'
-        request.body = artifactContents
+        request.body = artifactContents.getBytes()
     }
 }
