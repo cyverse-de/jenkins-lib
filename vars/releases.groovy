@@ -31,9 +31,9 @@ def create(token, owner, repo, releaseName) {
 def uploadArtifact(token, owner, repo, releaseId, artifactName, fileName) {
     def f = new File(fileName)
     def uri = "https://uploads.github.com/repos/${owner}/${repo}/releases/${releaseId}/assets?name=${artifactName}"
-    // githubClient(token).post {
-    //     request.uri = uri
-    //     request.contentType = 'application/octet-stream'
-    //     request.body = f.bytes
-    // }
+    def response = githubClient(token).post {
+        request.uri = uri
+        request.contentType = 'application/octet-stream'
+        request.body = f.bytes
+    }
 }
