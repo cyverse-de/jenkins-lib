@@ -4,6 +4,7 @@
 
 import groovyx.net.http.*
 
+@NonCPS
 def githubClient(token) {
     return HttpBuilder.configure {
         request.uri = 'https://api.github.com'
