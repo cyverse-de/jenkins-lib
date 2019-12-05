@@ -29,7 +29,7 @@ def create(token, owner, repo, releaseName) {
 
 def uploadArtifact(token, owner, repo, releaseId, artifactName, filename) {
     def uri = "https://uploads.github.com/repos/${owner}/${repo}/releases/${releaseId}/assets"
-    sh """curl -H 'Authorization: token ${token}' \
+    sh """echo curl -H 'Authorization: token ${token}' \
                -H 'Content-Type: application/octet-stream' \
                --data-binary '@${filename}' \
                '${uri}'"""
