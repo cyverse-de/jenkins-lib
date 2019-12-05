@@ -28,13 +28,14 @@ def create(token, owner, repo, releaseName) {
 }
 
 @NonCPS
-def uploadArtifact(token, owner, repo, releaseId, artifactName, artifactContents) {
+def uploadArtifact(token, owner, repo, releaseId, artifactName, filename) {
     def uri = "https://uploads.github.com/repos/${owner}/${repo}/releases/${releaseId}/assets"
+    def f = new File(filename)
     githubClient(token).post {
         request.uri = uri
         request.uri.query = [name: artifactName]
         request.contentType = 'application/octet-stream'
-        request.body = artifactContents.getBytes()
+        request.body = f.bytes
     }
     return
 }
